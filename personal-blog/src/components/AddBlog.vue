@@ -54,15 +54,20 @@ export default {
     };
   },
   methods: {
-    //jsonplaceholder
-    //https://jsonplaceholder.typicode.com/posts
+    //测试用：jsonplaceholderd地址<--https://jsonplaceholder.typicode.com/posts-->
+    //firebase地址：<--https://personal-blog-a676e.firebaseio.com/-->
     addBlog: function() {
       this.$http
-        .post("https://jsonplaceholder.typicode.com/posts", {
-          title: this.blog.title,
-          body: this.blog.content,
-          userId: 1
-        })
+        //测试用：jsonplaceholderd地址
+        // .post("https://jsonplaceholder.typicode.com/posts", {
+        //   title: this.blog.title,
+        //   body: this.blog.content,
+        //   userId: 1
+        // })
+        .post(
+          "https://personal-blog-a676e.firebaseio.com/addBlog.json",
+          this.blog
+        )
         .then(data => {
           console.log(data);
           this.submitted = true;

@@ -3,8 +3,10 @@
     <h1>博客总览</h1>
     <input type="text" placeholder="搜索" v-model="search" />
     <div v-for="(blog,index) in filteredBlogs" :key="index" class="single-blog">
-      <h2 v-custome>{{blog.title | to-uppercase}}</h2>
-      <article>{{blog.body | snipter}}</article>
+      <router-link :to="'/blog/'+blog.id">
+        <h2 v-custome>{{blog.title | to-uppercase}}</h2>
+      </router-link>
+      <article>{{blog.content | snipter}}</article>
     </div>
   </div>
 </template>
@@ -18,13 +20,31 @@ export default {
     };
   },
   created() {
-    //placeolder在线地址
-    //https://jsonplaceholder.typicode.com/posts
-    this.$http.get("https://jsonplaceholder.typicode.com/posts").then(data => {
-      // console.log(data);
-      this.blogs = data.body.slice(0, 10);
-      console.log(this.blogs);
-    });
+    //测试用：jsonplaceholderd地址<--https://jsonplaceholder.typicode.com/posts-->
+    //firebase地址：<--https://personal-blog-a676e.firebaseio.com/-->
+    this.$http
+      .get("https://personal-blog-a676e.firebaseio.com/addBlog.json")
+      .then(res => {
+        // console.log(res);
+        // 将返回回来的数据json化
+        return res.json();
+        // console.log(res.json());
+      })
+      .then(data => {
+        //拿到了firebase中中存储的数条数据
+        // console.log(data); //{-Lud98ACO05ts01X9wo8: {…}, -LudARLTkvG7SF5K6gyg: {…}}
+        var blogsArray = [];
+        for (let key in data) {
+          // console.log(key); //-Lud98ACO05ts01X9wo8  -Lud98ACO05ts01X9wo8
+          // console.log(data[key]); //{author: "alvis", categories: Array(1), content: "这是第一条数据", title: "alvie first"}   {author: "lili", categories: Array(2), content: "丽丽", title: "丽丽"}
+
+          //在每个对象中添加一个id,id的内容就是我们拿到的key值
+          data[key].id = key;
+          blogsArray.push(data[key]);
+          // console.log(blogsArray);
+        }
+        this.blogs = blogsArray;
+      });
   },
   computed: {
     filteredBlogs() {

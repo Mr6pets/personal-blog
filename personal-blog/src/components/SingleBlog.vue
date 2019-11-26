@@ -7,6 +7,8 @@
     <ul>
       <li v-for="(item,index) in blog.categories" :key="index">{{item}}</li>
     </ul>
+    <button @click="deleteSingleBlog">删除博客</button>
+    <router-link :to="/edit/+this.id">编辑博客</router-link>
   </div>
 </template>
 <script>
@@ -35,6 +37,20 @@ export default {
         // console.log(data);//{author: "lili", categories: Array(2), content: "丽丽", title: "丽丽"}
         this.blog = data;
       });
+  },
+  methods: {
+    deleteSingleBlog() {
+      this.$http
+        .delete(
+          "https://personal-blog-a676e.firebaseio.com/addBlog/" +
+            this.id +
+            ".json"
+        )
+        .then(response => {
+          //删除成功跳转到博客页面
+          this.$router.push({ path: "/" });
+        });
+    }
   }
 };
 </script>

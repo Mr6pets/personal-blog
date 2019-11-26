@@ -5,11 +5,14 @@ Vue.use(VueRouter)
 import ShowBlogs from '../components/ShowBlogs'
 import AddBlog from '../components/AddBlog'
 import SingleBlog from '../components/SingleBlog'
+import EditBlog from '../components/EditBlog'
+
 //创建路由
 const routes = [
   { path: "/", component: ShowBlogs },
   { path: "/add", component: AddBlog },
-  { path: "/blog/:id", component: SingleBlog }
+  { path: "/blog/:id", component: SingleBlog },
+  { path: "/edit/:id", component: EditBlog }
 ]
 
 const router = new VueRouter({

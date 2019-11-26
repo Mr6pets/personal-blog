@@ -7,8 +7,8 @@
   </div>
 </template>
 <script>
-import AddBlog from "./components/AddBlog";
-import ShowBlogs from "./components/ShowBlogs";
+// import AddBlog from "./components/AddBlog";
+// import ShowBlogs from "./components/ShowBlogs";
 import NavHeader from "./components/NavHeader";
 export default {
   name: "App",

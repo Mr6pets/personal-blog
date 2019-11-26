@@ -1,6 +1,6 @@
 <template>
-  <div class="add-blog">
-    <h2>博客添加</h2>
+  <div class="edit-blog">
+    <h2>编辑博客</h2>
     <form v-if="!submitted">
       <label>博客标题</label>
       <input type="text" v-model="blog.title" required />
@@ -20,7 +20,7 @@
       <select v-model="blog.author">
         <option v-for="(author ,index) in authors" :key="index">{{author}}</option>
       </select>
-      <button @click.prevent="addBlog">添加博客</button>
+      <button @click.prevent="editBlog">编辑博客</button>
     </form>
     <div v-if="submitted">
       <h3>发布成功</h3>
@@ -40,32 +40,36 @@
 
 <script>
 export default {
-  name: "add-blog",
+  name: "edit-blog",
   data() {
     return {
-      blog: {
-        title: "",
-        content: "",
-        categories: [],
-        author: ""
-      },
+      id: this.$route.params.id,
+      blog: {},
       authors: ["alvis", "lili", "miqi", "pinking"],
       submitted: false
     };
   },
   methods: {
-    //测试用：jsonplaceholderd地址<--https://jsonplaceholder.typicode.com/posts-->
-    //firebase地址：<--https://personal-blog-a676e.firebaseio.com/-->
-    addBlog: function() {
+    getDate() {
+      // console.log(this.id);
       this.$http
-        //测试用：jsonplaceholderd地址
-        // .post("https://jsonplaceholder.typicode.com/posts", {
-        //   title: this.blog.title,
-        //   body: this.blog.content,
-        //   userId: 1
-        // })
-        .post(
-          "https://personal-blog-a676e.firebaseio.com/addBlog.json",
+        .get(
+          "https://personal-blog-a676e.firebaseio.com/addBlog/" +
+            this.id +
+            ".json"
+        )
+        .then(res => {
+          // console.log(res);
+          this.blog = res.body;
+        });
+    },
+    //firebase地址：<--https://personal-blog-a676e.firebaseio.com/-->
+    editBlog: function() {
+      this.$http
+        .put(
+          "https://personal-blog-a676e.firebaseio.com/addBlog/" +
+            this.id +
+            ".json",
           this.blog
         )
         .then(data => {
@@ -74,18 +78,19 @@ export default {
         });
     }
   },
-  props: {
-    msg: String
+  created() {
+    //进入页面开始请求这个请求的id的内容数据
+    this.getDate();
   }
 };
 </script>
 
 <style scoped>
-.add-blog * {
+.edit-blog * {
   box-sizing: border-box;
 }
 
-.add-blog {
+.edit-blog {
   margin: 20px auto;
   max-width: 600px;
   padding: 20px;

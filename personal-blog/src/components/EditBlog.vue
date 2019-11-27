@@ -45,7 +45,16 @@ export default {
     return {
       id: this.$route.params.id,
       blog: {},
-      authors: ["alvis", "lili", "miqi", "pinking"],
+      authors: [
+        "alvis",
+        "luxy",
+        "simon",
+        "coco",
+        "刘二狗",
+        "钟铁蛋",
+        "韩建国",
+        "李国庆"
+      ],
       submitted: false
     };
   },
@@ -59,7 +68,7 @@ export default {
             ".json"
         )
         .then(res => {
-          // console.log(res);
+          console.log(res);
           this.blog = res.body;
         });
     },
@@ -126,7 +135,7 @@ textarea {
 button {
   display: block;
   margin: 20px 0;
-  background: crimson;
+  background: rgb(70, 161, 209);
   color: #fff;
   border: 0;
   padding: 14px;

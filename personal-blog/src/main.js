@@ -25,7 +25,7 @@ Vue.directive('theme', {
     }
     //如果v-theme：col后面有col那就执行下面的方法
     if (binding.arg == 'col') {
-      el.style.background = "#999999";
+      el.style.background = "#6DA1FC";
       el.style.padding = '20px'
     }
   }

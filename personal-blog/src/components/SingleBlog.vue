@@ -7,8 +7,10 @@
     <ul>
       <li v-for="(item,index) in blog.categories" :key="index">{{item}}</li>
     </ul>
-    <button @click="deleteSingleBlog">删除博客</button>
-    <router-link :to="/edit/+this.id">编辑博客</router-link>
+    <button @click="deleteSingleBlog" class="delBlog">删除博客</button>
+    <div class="editBlog">
+      <router-link :to="/edit/+this.id">编辑博客</router-link>
+    </div>
   </div>
 </template>
 <script>
@@ -61,5 +63,29 @@ export default {
   padding: 20px;
   background: #eee;
   border: 1px dotted #aaa;
+}
+.delBlog {
+  width: 80px;
+  height: 30px;
+  border: 0;
+  border-radius: 2px;
+  background-color: rgb(70, 161, 209);
+  color: white;
+  font-size: 16px;
+  margin: 0 5px;
+}
+.editBlog {
+  width: 80px;
+  height: 30px;
+  line-height: 30px;
+  text-align: center;
+  border-radius: 2px;
+  background-color: green;
+  font-size: 16px;
+  display: inline-block;
+}
+.editBlog a {
+  text-decoration: none;
+  color: white;
 }
 </style>

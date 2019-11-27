@@ -31,7 +31,7 @@ a {
   border-radius: 5px;
 }
 nav {
-  background: crimson;
+  background: rgb(70, 161, 209);
   padding: 30px 0;
   margin-bottom: 40px;
 }

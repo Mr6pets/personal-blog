@@ -49,7 +49,16 @@ export default {
         categories: [],
         author: ""
       },
-      authors: ["alvis", "lili", "miqi", "pinking"],
+      authors: [
+        "alvis",
+        "luxy",
+        "simon",
+        "coco",
+        "刘二狗",
+        "钟铁蛋",
+        "韩建国",
+        "李国庆"
+      ],
       submitted: false
     };
   },
@@ -121,7 +130,7 @@ textarea {
 button {
   display: block;
   margin: 20px 0;
-  background: crimson;
+  background: rgb(70, 161, 209);
   color: #fff;
   border: 0;
   padding: 14px;
